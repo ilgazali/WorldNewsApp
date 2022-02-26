@@ -10,21 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/main_toolbar_layout">
+
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_marginTop="0dp"
-            android:background="@color/black"
-            android:id="@+id/toolbar">
+            android:background="@color/black">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="News"
                     android:textColor="#03A9F4"
                     android:textSize="20sp"
@@ -32,8 +35,23 @@
 
                 </TextView>
 
+                <com.hbb20.CountryCodePicker
 
-            </RelativeLayout>
+                    android:id="@+id/ccp"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/country_code_drawable"
+                    android:padding="5dp"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_showFullName="false"
+                    app:ccp_showPhoneCode="false"
+                    app:ccp_textSize="12sp">
+
+                </com.hbb20.CountryCodePicker>
+
+            </LinearLayout>
 
 
         </androidx.appcompat.widget.Toolbar>

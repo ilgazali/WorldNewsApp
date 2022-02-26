@@ -1,6 +1,7 @@
 package com.example.newsapp.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newsapp.MainActivity;
+import com.example.newsapp.MainActivityViewModel;
 import com.example.newsapp.model.MainNews;
 import com.example.newsapp.model.ModelClass;
 import com.example.newsapp.R;
@@ -26,15 +30,28 @@ import retrofit2.Response;
 
 public class TecnologyFragment extends Fragment {
 
-    String apiKey = "12c0646cee1f428bbf6964a755f71afd";
+    String apiKey = "b5d9e80d15854aab9593cec3c7c36b38";
     private RecyclerView recyclerViewOfTecnology;
     Adapter adapter;
     ArrayList<ModelClass> modelClassArrayList;
-    String country = "tr";
+
     String category = "technology";
 
     MainActivity mainActivity;
 
+    private MainActivityViewModel viewModel;
+
+    public TecnologyFragment() {
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        viewModel = new ViewModelProvider(getActivity()).get(MainActivityViewModel.class);
+
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,7 +67,19 @@ public class TecnologyFragment extends Fragment {
 
         recyclerViewOfTecnology.setAdapter(adapter);
 
-        findNews();
+        viewModel.getCountry().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                Log.e("viewModel",s);
+
+                findNews(s,category,100,apiKey);
+
+                adapter.notifyDataSetChanged();
+
+
+            }
+        });
         final int[] state = new int[1];
 
         recyclerViewOfTecnology.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -85,9 +114,9 @@ public class TecnologyFragment extends Fragment {
     private void hideToolbar() {
         mainActivity.mMainToolbarLayout.setVisibility(View.GONE);
     }
-    private void findNews() {
+    private void findNews(String country,String category, int pageSize,String apiKey) {
 
-        ApiUtilities.getApiInterface().getCategoryNews(country,category,100,apiKey).enqueue(new Callback<MainNews>() {
+        ApiUtilities.getApiInterface().getCategoryNews(country,category,pageSize,apiKey).enqueue(new Callback<MainNews>() {
             @Override
             public void onResponse(Call<MainNews> call, Response<MainNews> response) {
 

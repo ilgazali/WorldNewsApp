@@ -105,6 +105,15 @@
         </com.google.android.material.tabs.TabItem>
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/business"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="busıness">
+
+        </com.google.android.material.tabs.TabItem>
+
+
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/entertainment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,6 +142,16 @@
 
 
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="276dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-7070673976351304/2515587749">
 
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

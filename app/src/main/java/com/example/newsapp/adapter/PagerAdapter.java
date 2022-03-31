@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.newsapp.fragment.BusinessFragment;
 import com.example.newsapp.fragment.EntertainmentFragment;
 import com.example.newsapp.fragment.HealthFragment;
 import com.example.newsapp.fragment.HomeFragment;
@@ -38,8 +39,10 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 3:
                 return new ScienceFragment();
             case 4:
-                return new EntertainmentFragment();
+                return new BusinessFragment();
             case 5:
+                return new EntertainmentFragment();
+            case 6:
                 return new TecnologyFragment();
             default:
                 return null;
